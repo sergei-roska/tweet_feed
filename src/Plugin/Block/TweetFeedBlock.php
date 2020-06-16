@@ -31,7 +31,7 @@ class TweetFeedBlock extends BlockBase {
     $form['test_mode'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Test Mode'),
-      '#default_value' => $this->configuration['test_mode'],
+      '#default_value' => !empty($this->configuration['test_mode']) ? $this->configuration['test_mode'] : '',
     ];
 
     $form['get_tweet_timelines'] = [
@@ -46,7 +46,7 @@ class TweetFeedBlock extends BlockBase {
         // https://api.twitter.com/1.1/statuses/mentions_timeline.json?count=2&since_id=14927799
         'mentions_timeline' => $this->t('Mentions timeline'),
       ],
-      '#default_value' => $this->configuration['get_tweet_timelines'],
+      '#default_value' => !empty($this->configuration['get_tweet_timelines']) ? $this->configuration['get_tweet_timelines'] : '',
       '#weight' => 1,
       '#required' => TRUE,
     ];
@@ -54,7 +54,7 @@ class TweetFeedBlock extends BlockBase {
     $form['screen_name'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Screen name'),
-      '#default_value' => $this->configuration['screen_name'],
+      '#default_value' => !empty($this->configuration['screen_name']) ? $this->configuration['screen_name'] : '',
       '#description' => $this->t('The screen name of the user for whom to return results.'),
       '#maxlength' => 64,
       '#size' => 64,
@@ -64,7 +64,7 @@ class TweetFeedBlock extends BlockBase {
     $form['count'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Count'),
-      '#default_value' => $this->configuration['count'],
+      '#default_value' => !empty($this->configuration['count']) ? $this->configuration['count'] : '',
       '#description' => $this->t('Specifies the number of Tweets to try and retrieve, up to a maximum of 200 per distinct request.'),
       '#maxlength' => 64,
       '#size' => 64,
@@ -74,7 +74,7 @@ class TweetFeedBlock extends BlockBase {
     $form['since_id'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Since id'),
-      '#default_value' => $this->configuration['since_id'],
+      '#default_value' => !empty($this->configuration['since_id']) ? $this->configuration['since_id'] : '',
       '#description' => $this->t('Returns results with an ID greater than (that is, more recent than) the specified ID.'),
       '#maxlength' => 64,
       '#size' => 64,
@@ -135,6 +135,9 @@ class TweetFeedBlock extends BlockBase {
     return [
       '#theme' => 'tweet_feed_user_timeline',
       '#tweet' => $json,
+      '#attached' => [
+        'library' => ['tweet_post/tweet_post.block_tweet_post'],
+      ],
     ];
   }
 
