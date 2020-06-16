@@ -1,0 +1,5 @@
+name: 'Tweet post'
+type: module
+description: 'Extract tweet text and published data'
+core: 8.x
+package: 'Custom'

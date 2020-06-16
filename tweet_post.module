@@ -1,0 +1,47 @@
+<?php
+
+/**
+ * @file
+ * Contains tweet_post.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function tweet_post_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the tweet_post module.
+    case 'help.page.tweet_post':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Extract tweet text and published data') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function tweet_post_theme($existing, $type, $theme, $path) {
+  return [
+    'tweet_feed_home_timeline' => [
+      'variables' => [
+        'tweet' => [],
+      ],
+    ],
+    'tweet_feed_user_timeline' => [
+      'variables' => [
+        'tweet' => [],
+      ],
+    ],
+    'tweet_feed_mentions_timeline' => [
+      'variables' => [
+        'tweet' => [],
+      ],
+    ],
+  ];
+}

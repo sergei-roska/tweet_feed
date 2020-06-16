@@ -1,0 +1,6 @@
+tweet_post.tweet_config_form:
+  title: 'Tweet Config'
+  route_name: tweet_post.tweet_config_form
+  description: 'Enter Your Tokens'
+  parent: system.admin_config_system
+  weight: 99
