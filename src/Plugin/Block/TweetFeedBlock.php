@@ -135,9 +135,6 @@ class TweetFeedBlock extends BlockBase {
     return [
       '#theme' => 'tweet_feed_user_timeline',
       '#tweet' => $json,
-      '#attached' => [
-        'library' => ['tweet_post/tweet_post.block_tweet_post'],
-      ],
     ];
   }
 
