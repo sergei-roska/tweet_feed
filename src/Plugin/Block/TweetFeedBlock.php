@@ -155,6 +155,9 @@ class TweetFeedBlock extends BlockBase {
     return [
       '#theme' => 'tweet_feed_home_timeline',
       '#tweet' => $json,
+      '#attached' => [
+        'library' => ['tweet_post/tweet_post.block_tweet_post'],
+      ],
     ];
   }
 
@@ -168,10 +171,12 @@ class TweetFeedBlock extends BlockBase {
     if ($mode) {
       $json = Json::decode(file_get_contents('modules/custom/tweet_post/src/json/mentions_timeline.json'));
     }
-
     return [
       '#theme' => 'tweet_feed_mentions_timeline',
       '#tweet' => $json,
+      '#attached' => [
+        'library' => ['tweet_post/tweet_post.block_tweet_post'],
+      ],
     ];
   }
 
