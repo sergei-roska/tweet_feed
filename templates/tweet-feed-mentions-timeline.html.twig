@@ -1,11 +1,11 @@
 {#<p>{{ dump(tweet) }}</p>#}
 
-<ul>
+<ul class="tp--list">
   {% for element in tweet %}
-    <li>
-      <div>{{ element.created_at }}</div>
-      <div>{{ element.text }}</div>
-      <div>More informatio at: {{ element.source }}</div>
+    <li class="tp--item">
+      <div class="tp--item__date">{{ element.created_at }}</div>
+      <div class="tp--item__tweet">{{ element.text }}</div>
+      <div  class="tp--item__more"><span>More information at:</span> {{ element.source }}</div>
     </li>
   {% endfor %}
 </ul>

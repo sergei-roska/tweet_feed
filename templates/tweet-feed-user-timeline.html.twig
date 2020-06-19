@@ -1,12 +1,20 @@
 {#<p>{{ dump(tweet) }}</p>#}
 
-<ul>
+<ul class="tp--list">
   {% for element in tweet %}
-    <li>
-      <div>{{ element.created_at }}</div>
+    <li class="tp--item">
+      <div class="tp--item__date">{{ element.created_at }}</div>
 {#      <div>{{ element.user.name }}</div>#}
-      <div>{{ element.text }}</div>
-      <div>More informatio at: {{ element.source }}</div>
+      <div class="tp--item__tweet">{{ element.text|raw }}
+      
+      {{ kint(element) }}
+      
+      {% set textElems = element.text|split(":") %}
+
+      {{ kint(textElems) }}
+      </div>
+      <div class="tp--item__more" ><span>More information at:</span>  {{ element.source | raw }} </div>
     </li>
   {% endfor %}
 </ul>
+

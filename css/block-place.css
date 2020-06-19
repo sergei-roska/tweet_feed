@@ -1,7 +1,46 @@
-.tweet_block {
-    background-color: #ffffff;
+.tweet_block .tweet--title {
+    font-size: 30px;
+    display: inline;
+    border: none;
+    color: #657786;
 }
 
-.tweet_list {
-    color: red;
+.tweet_block svg {
+    width: 10%;
+    height: auto;
+    vertical-align: middle;
+    margin-right: 1rem;
+}
+
+.tp--list {
+    padding: 0;
+    list-style-type: none;
+    font-size: 14px;
+    color: #4c4c4c;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.tp--item {
+    margin-bottom: 0.5rem;
+}
+
+.tp--item__date,
+.tp--item__more {
+    color: #337ab7;
+}
+
+.tp--item__more span {
+    color: #4c4c4c;
+}
+
+.tp--button {
+    font-size: 12px;
+    border: 2px solid #337ab7;
+    color: #337ab7;
+    background-color: transparent;
+    margin: 2rem 5rem;
+    padding: 0.5rem;
+    outline: none;
+    width: 5rem;
+    height: auto;
 }
