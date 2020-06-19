@@ -5,6 +5,7 @@ namespace Drupal\tweet_post\Plugin\Block;
 use Drupal\Component\Serialization\Json;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\tweet_post\TweeterCallService;
 
 /**
  * Provides a 'TweetFeedBlock' block.
@@ -127,17 +128,36 @@ class TweetFeedBlock extends BlockBase {
    * @return array
    */
   private function build_user_timeline($mode = FALSE) {
-    $json = '';
-    if ($mode) {
-      $json = Json::decode(file_get_contents('modules/custom/tweet_post/src/json/user_timeline.json'));
+    if ($mode || empty($this->configuration['screen_name'])) {
+      $json = Json::decode(file_get_contents(__DIR__ . '/json/user_timeline.json'));
+    }
+    else {
+      // ?screen_name=twitterapi&count=2
+      $url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
+      $requestMethod = 'GET';
+      $postfields = array(
+        'screen_name' => $this->configuration['screen_name'],
+        'count' => empty($this->configuration['count']) ? 3 : $this->configuration['count'],
+      );
+      /** @var TweeterCallService $twitter */
+      $twitter = \Drupal::service('tweet_post.call_tweet');
+      $conf = \Drupal::config('tweet_post.tweetconfig');
+      // @todo: check for existing settings.
+      $twitter->setSettings([
+        'oauth_access_token' => $conf->get('oauth_access_token'),
+        'oauth_access_token_secret' => $conf->get('oauth_access_token_secret'),
+        'consumer_key' => $conf->get('consumer_key'),
+        'consumer_secret' => $conf->get('consumer_secret'),
+      ]);
+      // @todo: here will be: try/catch
+      $json = $twitter->buildOauth($url, $requestMethod)
+        ->setPostfields($postfields)
+        ->performRequest();
     }
 
     return [
       '#theme' => 'tweet_feed_user_timeline',
       '#tweet' => $json,
-      '#attached' => [
-        'library' => ['tweet_post/tweet_post.block_tweet_post'],
-      ],
     ];
   }
 
@@ -149,7 +169,7 @@ class TweetFeedBlock extends BlockBase {
   private function build_home_timeline($mode = FALSE) {
     $json = '';
     if ($mode) {
-      $json = Json::decode(file_get_contents('modules/custom/tweet_post/src/json/home_timeline.json'));
+      $json = Json::decode(file_get_contents(__DIR__ . '/json/home_timeline.json'));
     }
 
     return [
@@ -169,7 +189,7 @@ class TweetFeedBlock extends BlockBase {
   private function build_mention_timeline($mode = FALSE) {
     $json = '';
     if ($mode) {
-      $json = Json::decode(file_get_contents('modules/custom/tweet_post/src/json/mentions_timeline.json'));
+      $json = Json::decode(file_get_contents(__DIR__ . '/json/mentions_timeline.json'));
     }
     return [
       '#theme' => 'tweet_feed_mentions_timeline',

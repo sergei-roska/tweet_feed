@@ -1,0 +1,7 @@
+services:
+  logger.channel.tweet_post:
+    parent: logger.channel_base
+    arguments: ['tweet_post']
+  tweet_post.call_tweet:
+    class: Drupal\tweet_post\TweeterCallService
+    arguments: []
