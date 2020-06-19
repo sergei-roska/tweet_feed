@@ -129,7 +129,7 @@ class TweetFeedBlock extends BlockBase {
    */
   private function build_user_timeline($mode = FALSE) {
     if ($mode || empty($this->configuration['screen_name'])) {
-      $json = Json::decode(file_get_contents('modules/custom/tweet_post/src/json/user_timeline.json'));
+      $json = Json::decode(file_get_contents(__DIR__ . '/json/user_timeline.json'));
     }
     else {
       // ?screen_name=twitterapi&count=2
@@ -169,7 +169,7 @@ class TweetFeedBlock extends BlockBase {
   private function build_home_timeline($mode = FALSE) {
     $json = '';
     if ($mode) {
-      $json = Json::decode(file_get_contents('modules/custom/tweet_post/src/json/home_timeline.json'));
+      $json = Json::decode(file_get_contents(__DIR__ . '/json/home_timeline.json'));
     }
 
     return [
@@ -186,7 +186,7 @@ class TweetFeedBlock extends BlockBase {
   private function build_mention_timeline($mode = FALSE) {
     $json = '';
     if ($mode) {
-      $json = Json::decode(file_get_contents('modules/custom/tweet_post/src/json/mentions_timeline.json'));
+      $json = Json::decode(file_get_contents(__DIR__ . '/json/mentions_timeline.json'));
     }
 
     return [
