@@ -149,10 +149,11 @@ class TweetFeedBlock extends BlockBase {
         'consumer_key' => $conf->get('consumer_key'),
         'consumer_secret' => $conf->get('consumer_secret'),
       ]);
-      // @todo: here will be: try/catch
-      $json = $twitter->buildOauth($url, $requestMethod)
+      // @todo: here will be: try/catch.
+      $json_responce = $twitter->buildOauth($url, $requestMethod)
         ->setPostfields($postfields)
         ->performRequest();
+      $json = Json::decode($json_responce);
     }
 
     return [
