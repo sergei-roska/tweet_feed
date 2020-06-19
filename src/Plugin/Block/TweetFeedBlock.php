@@ -132,6 +132,9 @@ class TweetFeedBlock extends BlockBase {
       $json = Json::decode(file_get_contents(__DIR__ . '/json/user_timeline.json'));
       foreach ($json as &$item) {
         $item['created_at'] = date('d M', strtotime($item['created_at']));
+        list($user, $message) = explode(":", $item['text'], 2);
+        $item['name'] = $user;
+        $item['message'] = $message;
       }
     }
     else {
