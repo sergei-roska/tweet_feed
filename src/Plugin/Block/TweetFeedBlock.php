@@ -5,6 +5,7 @@ namespace Drupal\tweet_post\Plugin\Block;
 use Drupal\Component\Serialization\Json;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\tweet_post\TweeterCallService;
 
 /**
  * Provides a 'TweetFeedBlock' block.
@@ -128,8 +129,29 @@ class TweetFeedBlock extends BlockBase {
    */
   private function build_user_timeline($mode = FALSE) {
     $json = '';
-    if ($mode) {
+    if ($mode || empty($this->configuration['screen_name'])) {
       $json = Json::decode(file_get_contents('modules/custom/tweet_post/src/json/user_timeline.json'));
+    }
+    else {
+      // ?screen_name=twitterapi&count=2
+      $url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
+      $requestMethod = 'GET';
+      $postfields = array(
+        'screen_name' => $this->configuration['screen_name'],
+        'count' => empty($this->configuration['count']) ? 3 : $this->configuration['count'],
+      );
+      /** @var TweeterCallService $twitter */
+      $twitter = \Drupal::service('tweet_post.call_tweet');
+      $settings = \Drupal::config('tweet_post.tweetconfig');
+      $twitter->setSettings([
+        'oauth_access_token' => $settings->get('oauth_access_token'),
+        'oauth_access_token_secret' => $settings->get('oauth_access_token_secret'),
+        'consumer_key' => $settings->get('consumer_key'),
+        'consumer_secret' => $settings->get('consumer_secret'),
+      ]);
+      $json = $twitter->buildOauth($url, $requestMethod)
+        ->setPostfields($postfields)
+        ->performRequest();
     }
 
     return [
