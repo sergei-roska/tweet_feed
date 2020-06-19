@@ -130,6 +130,12 @@ class TweetFeedBlock extends BlockBase {
   private function build_user_timeline($mode = FALSE) {
     if ($mode || empty($this->configuration['screen_name'])) {
       $json = Json::decode(file_get_contents(__DIR__ . '/json/user_timeline.json'));
+      foreach ($json as &$item) {
+        $item['created_at'] = date('d M', strtotime($item['created_at']));
+        list($user, $message) = explode(":", $item['text'], 2);
+        $item['name'] = $user;
+        $item['message'] = $message;
+      }
     }
     else {
       // ?screen_name=twitterapi&count=2
@@ -149,10 +155,11 @@ class TweetFeedBlock extends BlockBase {
         'consumer_key' => $conf->get('consumer_key'),
         'consumer_secret' => $conf->get('consumer_secret'),
       ]);
-      // @todo: here will be: try/catch
-      $json = $twitter->buildOauth($url, $requestMethod)
+      // @todo: here will be: try/catch.
+      $json_responce = $twitter->buildOauth($url, $requestMethod)
         ->setPostfields($postfields)
         ->performRequest();
+      $json = Json::decode($json_responce);
     }
 
     return [
