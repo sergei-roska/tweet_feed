@@ -128,7 +128,6 @@ class TweetFeedBlock extends BlockBase {
    * @return array
    */
   private function build_user_timeline($mode = FALSE) {
-    $json = '';
     if ($mode || empty($this->configuration['screen_name'])) {
       $json = Json::decode(file_get_contents('modules/custom/tweet_post/src/json/user_timeline.json'));
     }
@@ -142,13 +141,15 @@ class TweetFeedBlock extends BlockBase {
       );
       /** @var TweeterCallService $twitter */
       $twitter = \Drupal::service('tweet_post.call_tweet');
-      $settings = \Drupal::config('tweet_post.tweetconfig');
+      $conf = \Drupal::config('tweet_post.tweetconfig');
+      // @todo: check for existing settings.
       $twitter->setSettings([
-        'oauth_access_token' => $settings->get('oauth_access_token'),
-        'oauth_access_token_secret' => $settings->get('oauth_access_token_secret'),
-        'consumer_key' => $settings->get('consumer_key'),
-        'consumer_secret' => $settings->get('consumer_secret'),
+        'oauth_access_token' => $conf->get('oauth_access_token'),
+        'oauth_access_token_secret' => $conf->get('oauth_access_token_secret'),
+        'consumer_key' => $conf->get('consumer_key'),
+        'consumer_secret' => $conf->get('consumer_secret'),
       ]);
+      // @todo: here will be: try/catch
       $json = $twitter->buildOauth($url, $requestMethod)
         ->setPostfields($postfields)
         ->performRequest();
