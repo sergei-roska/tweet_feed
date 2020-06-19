@@ -5,13 +5,13 @@
     <li class="tp--item">
       <div class="tp--item__date">{{ element.created_at }}</div>
 {#      <div>{{ element.user.name }}</div>#}
-      <div class="tp--item__tweet">{{ element.text|raw }}
+      <div class="tp--item__tweet">{{ element.text}}
       
       {{ kint(element) }}
       
-      {% set textElems = element.text|split(":") %}
+      {# {% set textElems = element.text|split(":") %}
 
-      {{ kint(textElems) }}
+      {{ kint(textElems) }} #}
       </div>
       <div class="tp--item__more" ><span>More information at:</span>  {{ element.source | raw }} </div>
     </li>

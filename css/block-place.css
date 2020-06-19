@@ -6,7 +6,7 @@
 }
 
 .tweet_block svg {
-    width: 10%;
+    width: 30%;
     height: auto;
     vertical-align: middle;
     margin-right: 1rem;
@@ -17,7 +17,6 @@
     list-style-type: none;
     font-size: 14px;
     color: #4c4c4c;
-    font-family: 'Open Sans', sans-serif;
 }
 
 .tp--item {

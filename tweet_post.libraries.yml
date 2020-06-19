@@ -3,5 +3,3 @@ tweet_post.block_tweet_post:
   css:
     theme:
       css/block-place.css: {}
-  js:
-    js/block-js.js: {}
