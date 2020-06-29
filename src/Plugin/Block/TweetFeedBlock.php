@@ -172,6 +172,7 @@ class TweetFeedBlock extends BlockBase {
           '#markup' => $image . $span,
          ],
       ],
+      '#attributes' => ['class' => ['tweet_block']],
       '#tweet' => $json,
     ];
   }
