@@ -162,15 +162,15 @@ class TweetFeedBlock extends BlockBase {
       $json = Json::decode($json_responce);
     }
 
+    $src = file_url_transform_relative(file_create_url(drupal_get_path('module', 'tweet_post') . '/src/Plugin/Block/img/twitter.svg'));
+    $image = '<img alt="twitter" src="' . $src . '" />';
+    $span = '<span class="tweet--title">' . $this->configuration['label'] . '</span>';
     return [
       '#theme' => 'tweet_feed_user_timeline',
       '#title' => [
         'label' => [
-          '#markup' => '<img alt="twitter" src="' . file_url_transform_relative(file_create_url(drupal_get_path('module', 'tweet_post') . '/src/Plugin/Block/img/twitter.svg')) . '" /><span class="tweet--title">' . $this->configuration['label'] . '</span>'
-          // '#type' => 'container',
-          // '#children' =>  $this->configuration['label'],
-          // '#prefix' => '<img alt="twitter" src="' . file_url_transform_relative(file_create_url(drupal_get_path('module', 'tweet_post') . '/src/Plugin/Block/img/twitter.svg')) . '" />',
-        ],
+          '#markup' => $image . $span,
+         ],
       ],
       '#tweet' => $json,
     ];
@@ -187,13 +187,14 @@ class TweetFeedBlock extends BlockBase {
       $json = Json::decode(file_get_contents(__DIR__ . '/json/home_timeline.json'));
     }
 
+    $src = file_url_transform_relative(file_create_url(drupal_get_path('module', 'tweet_post') . '/src/Plugin/Block/img/twitter.svg'));
+    $image = '<img alt="twitter" src="' . $src . '" />';
+    $span = '<span class="tweet--title">' . $this->configuration['label'] . '</span>';
     return [
       '#theme' => 'tweet_feed_home_timeline',
       '#title' => [
         'label' => [
-          '#type' => 'container',
-          '#children' => $this->configuration['label'],
-          '#prefix' => '<img alt="twitter" src="' . file_url_transform_relative(file_create_url(drupal_get_path('module', 'tweet_post') . '/src/Plugin/Block/img/twitter.svg')) . '" />',
+          '#markup' => $image . $span,
         ],
       ],
       '#tweet' => $json,
@@ -213,13 +214,15 @@ class TweetFeedBlock extends BlockBase {
     if ($mode) {
       $json = Json::decode(file_get_contents(__DIR__ . '/json/mentions_timeline.json'));
     }
+
+    $src = file_url_transform_relative(file_create_url(drupal_get_path('module', 'tweet_post') . '/src/Plugin/Block/img/twitter.svg'));
+    $image = '<img alt="twitter" src="' . $src . '" />';
+    $span = '<span class="tweet--title">' . $this->configuration['label'] . '</span>';
     return [
       '#theme' => 'tweet_feed_mentions_timeline',
       '#title' => [
         'label' => [
-          '#type' => 'container',
-          '#children' => $this->configuration['label'],
-          '#prefix' => '<img alt="twitter" src="' . file_url_transform_relative(file_create_url(drupal_get_path('module', 'tweet_post') . '/src/Plugin/Block/img/twitter.svg')) . '" />',
+          '#markup' => $image . $span,
         ],
       ],
       '#tweet' => $json,
