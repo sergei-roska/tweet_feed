@@ -1,15 +1,15 @@
-.tweet_block .tweet--title-container {
+.tweet_block {
     border: none;
 }
 
-.tweet--title-container img {
+.tweet_block h2 img {
     width: 30%;
     height: auto;
     vertical-align: middle;
     margin-right: 1rem;
 }
 
-.tweet--title {
+.tweet_block h2 .tweet--title {
     font-size: 30px;
     display: inline;
     color: #657786;
