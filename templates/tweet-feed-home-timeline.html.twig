@@ -3,8 +3,11 @@
 <ul class="tp--list">
   <li class="tp--item">
     <div class="tp--item__date">{{ element.created_at }}</div>
-    <div class="tp--item__tweet">{{ element.text }}</div>
-    <div class="tp--item__more"><span>More information at:</span> {{ tweet.source|raw }}</div>
+      <div class="tp--item__tweet">
+        <span class="tp--item__user">{{ element.name }}</span>
+        {{ element.message }}
+      </div>
+    <div>More information at:<span class="tp--item__more">{{ tweet.source|raw }}</span></div>
   </li>
 </ul>
   <button class="tp--button">View all</button>

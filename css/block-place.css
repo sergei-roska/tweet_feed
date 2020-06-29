@@ -24,12 +24,9 @@
 }
 
 .tp--item__date,
-.tp--item__more {
+.tp--item__more,
+.tp--item__user {
     color: #337ab7;
-}
-
-.tp--item__more span {
-    color: #4c4c4c;
 }
 
 .tp--button {

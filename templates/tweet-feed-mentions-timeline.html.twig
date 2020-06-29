@@ -5,7 +5,10 @@
     <li class="tp--item">
       <div class="tp--item__date">{{ element.created_at }}</div>
       <div class="tp--item__tweet">{{ element.text }}</div>
-      <div  class="tp--item__more"><span>More information at:</span> {{ element.source }}</div>
+      <div>
+        More information at:
+        <span class="tp--item__more">{{ element.source|raw }}</span>
+      </div>
     </li>
   {% endfor %}
 </ul>
