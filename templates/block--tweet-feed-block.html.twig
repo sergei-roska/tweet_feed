@@ -40,8 +40,7 @@
 <div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {% if label %}
-{% include directory ~ "/images/twitter.svg"%}
-    <h2 {{ title_attributes.addClass('tweet--title') }}>{{ label }}</h2>
+    <h2 {{ title_attributes.addClass('tweet--title-container') }}>{{ label }}</h2>
   {% endif %}
   {% block content %}
     <div{{ content_attributes.addClass('content') }}>

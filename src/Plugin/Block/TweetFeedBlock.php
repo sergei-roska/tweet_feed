@@ -166,9 +166,10 @@ class TweetFeedBlock extends BlockBase {
       '#theme' => 'tweet_feed_user_timeline',
       '#title' => [
         'label' => [
-          '#type' => 'container',
-          '#children' => $this->configuration['label'],
-          '#prefix' => '<img alt="twitter" src="' . file_url_transform_relative(file_create_url(drupal_get_path('module', 'tweet_post') . '/src/Plugin/Block/img/twitter.svg')) . '" />',
+          '#markup' => '<img alt="twitter" src="' . file_url_transform_relative(file_create_url(drupal_get_path('module', 'tweet_post') . '/src/Plugin/Block/img/twitter.svg')) . '" /><span class="tweet--title">' . $this->configuration['label'] . '</span>'
+          // '#type' => 'container',
+          // '#children' =>  $this->configuration['label'],
+          // '#prefix' => '<img alt="twitter" src="' . file_url_transform_relative(file_create_url(drupal_get_path('module', 'tweet_post') . '/src/Plugin/Block/img/twitter.svg')) . '" />',
         ],
       ],
       '#tweet' => $json,

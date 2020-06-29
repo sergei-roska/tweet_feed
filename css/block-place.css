@@ -1,15 +1,18 @@
-.tweet_block .tweet--title {
-    font-size: 30px;
-    display: inline;
+.tweet_block .tweet--title-container {
     border: none;
-    color: #657786;
 }
 
-.tweet_block svg {
+.tweet--title-container img {
     width: 30%;
     height: auto;
     vertical-align: middle;
     margin-right: 1rem;
+}
+
+.tweet--title {
+    font-size: 30px;
+    display: inline;
+    color: #657786;
 }
 
 .tp--list {
