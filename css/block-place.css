@@ -1,9 +1,9 @@
-.tweet_block {
-    border: none;
+.tweet_block h2 {
+    border: none !important;
 }
 
 .tweet_block h2 img {
-    width: 30%;
+    width: 80px;
     height: auto;
     vertical-align: middle;
     margin-right: 1rem;
@@ -33,11 +33,12 @@
 }
 
 .tp--button {
+    display: block;
     font-size: 12px;
     border: 2px solid #337ab7;
     color: #337ab7;
     background-color: transparent;
-    margin: 2rem 5rem;
+    margin: 2rem auto;
     padding: 0.5rem;
     outline: none;
     width: 5rem;
